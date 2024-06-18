@@ -26,8 +26,8 @@ export default function LoginCard() {
   const setUser = useSetRecoilState(userAtom);
   const [loading,setLoading] = useState(false);
 	const [inputs, setInputs] = useState({
-		username: "",
-		password: "",
+		username: "test1",
+		password: "123",
 	});
 	const showToast = useShowToast();
 	const handleLogin = async () => {
