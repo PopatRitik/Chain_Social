@@ -1,4 +1,4 @@
-import { Button, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import useShowToast from "../hooks/useShowToast";
 import useLogout from "../hooks/useLogout";
 
@@ -30,13 +30,15 @@ export const SettingsPage = () => {
 
 	return (
 		<>
+		<Flex alignItems={"center"} direction={"column"}>
 			<Text my={1} fontWeight={"bold"}>
 				Freeze Your Account
 			</Text>
-			<Text my={1}>You can unfreeze your account anytime by logging in.</Text>
+			<br></br>
 			<Button size={"sm"} colorScheme='red' onClick={freezeAccount}>
 				Freeze
 			</Button>
+			</Flex>
 		</>
 	);
 };

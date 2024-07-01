@@ -3,13 +3,13 @@ import Userheader from "../components/Userheader"
 import Post from "../components/Post"
 import { useParams } from "react-router-dom";
 import useShowToast from "../hooks/useShowToast";
-import { Flex, Spinner } from "@chakra-ui/react";
+import { Flex, Spinner, Box } from "@chakra-ui/react";
 import useGetUserProfile from "../hooks/useGetUserProfile";
 import { useRecoilState } from "recoil";
 import postsAtoms from "../atoms/postsAtom";
 
 const Userpage = () => {
-  const {user,loading}=useGetUserProfile();
+  const { user, loading } = useGetUserProfile();
   const [posts, setPosts] = useRecoilState(postsAtoms);
   const username = useParams();
   console.log(username)
@@ -34,7 +34,7 @@ const Userpage = () => {
       }
     }
     getPosts();
-  }, [username, showToast,setPosts]);
+  }, [username, showToast, setPosts]);
 
   if (!user && loading) {
     return (
@@ -48,17 +48,24 @@ const Userpage = () => {
 
   return (
     <>
-      <Userheader user={user} />
-      {!fetchingPosts && posts.length === 0 && <h1>User has not posts.</h1>}
-      {fetchingPosts && (
-        <Flex justifyContent={"center"} my={12}>
-          <Spinner size={"xl"} />
-        </Flex>
-      )}
+      <Box position={"absolute"}
+        left={"50%"}
+        w={{ base: "100%", md: "80%", lg: "620px" }}
+        p={4}
+        transform={"translateX(-50%)"}>
+        <Userheader user={user} />
+        {!fetchingPosts && posts.length === 0 && <h1>User has not posts.</h1>}
+        {fetchingPosts && (
+          <Flex justifyContent={"center"} my={12}>
+            <Spinner size={"xl"} />
+          </Flex>
+        )}
 
-      {posts.map((post) => (
-        <Post key={post._id} post={post} postedBy={post.postedBy} />
-      ))}
+        {posts.map((post) => (
+          <Post key={post._id} post={post} postedBy={post.postedBy} />
+        ))}
+      </Box>
+
     </>
   )
 }
